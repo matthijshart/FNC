@@ -1,1 +1,1094 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finca Javea | Luxe Villa in Xabia, Costa Blanca</title>
+  <meta name="description" content="Prachtige finca met 4 slaapkamers, gastenhuis en grote tuin in het hart van Javea/Xabia. Dichtbij het oude centrum en de kust.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+    :root {
+      --sand: #f5f0eb;
+      --sand-dark: #e8e0d6;
+      --stone: #8a7e72;
+      --charcoal: #2c2c2c;
+      --warm-white: #faf8f5;
+      --terracotta: #c4956a;
+      --olive: #7a8b6f;
+      --sea: #6a8fa8;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--charcoal);
+      background: var(--warm-white);
+      line-height: 1.6;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--sand); }
+    ::-webkit-scrollbar-thumb { background: var(--stone); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--terracotta); }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.4s ease;
+      background: transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(250, 248, 245, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+    }
+
+    nav .logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+
+    nav.scrolled .logo { color: var(--charcoal); }
+
+    nav .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.85);
+      transition: color 0.3s;
+    }
+
+    nav.scrolled .nav-links a { color: var(--stone); }
+    nav .nav-links a:hover { color: var(--terracotta); }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      margin: 5px 0;
+      transition: all 0.3s;
+    }
+
+    nav.scrolled .nav-toggle span { background: var(--charcoal); }
+
+    /* ── Hero ── */
+    .hero {
+      height: 100vh;
+      min-height: 600px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.45) 100%),
+        url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85&auto=format') center/cover no-repeat;
+    }
+
+    .hero-content {
+      position: relative;
+      padding: 0 3rem 5rem;
+      max-width: 700px;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.05rem;
+      font-weight: 300;
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll .line {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.4);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50% { transform: scaleY(0.5); opacity: 0.3; }
+    }
+
+    /* ── Section styles ── */
+    section { padding: 7rem 3rem; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--charcoal);
+    }
+
+    .section-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--stone);
+      max-width: 600px;
+    }
+
+    /* ── Intro ── */
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .intro-image {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+
+    .intro-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .intro-image:hover img { transform: scale(1.03); }
+
+    /* ── Key features ── */
+    .features {
+      background: var(--sand);
+    }
+
+    .features-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      font-size: 0.85rem;
+      color: var(--stone);
+      line-height: 1.6;
+    }
+
+    /* ── Gallery sections ── */
+    .gallery-section { max-width: 1400px; margin: 0 auto; }
+
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .gallery-grid.layout-a {
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    .gallery-grid.layout-a .gallery-item:first-child {
+      grid-row: 1 / -1;
+    }
+
+    .gallery-grid.layout-b {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .gallery-grid.layout-c {
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    .gallery-grid.layout-c .gallery-item:last-child {
+      grid-row: 1 / -1;
+      grid-column: 2;
+    }
+
+    .gallery-grid.layout-d {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .gallery-grid.layout-e {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      min-height: 280px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-item .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1.5rem 1.2rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+      color: #fff;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.4s ease;
+    }
+
+    .gallery-item:hover .caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Divider ── */
+    .divider {
+      padding: 0 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--sand-dark);
+    }
+
+    /* ── Quote / Highlight ── */
+    .highlight {
+      background: var(--charcoal);
+      color: #fff;
+      text-align: center;
+    }
+
+    .highlight-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .highlight blockquote {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+
+    .highlight cite {
+      font-style: normal;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    /* ── Details / Amenities ── */
+    .details {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .detail-group h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--sand-dark);
+    }
+
+    .detail-group ul {
+      list-style: none;
+    }
+
+    .detail-group li {
+      font-size: 0.9rem;
+      color: var(--stone);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--sand);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .detail-group li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Location ── */
+    .location {
+      background: var(--sand);
+    }
+
+    .location-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .location-distances {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .distance-item {
+      padding: 1rem;
+      background: var(--warm-white);
+      border-radius: 2px;
+    }
+
+    .distance-item .dist {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--terracotta);
+      display: block;
+    }
+
+    .distance-item .place {
+      font-size: 0.8rem;
+      color: var(--stone);
+      margin-top: 0.2rem;
+    }
+
+    .location-map {
+      aspect-ratio: 1;
+      background: var(--sand-dark);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .location-map img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── Pricing ── */
+    .pricing-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pricing-note {
+      margin-top: 2rem;
+      padding: 2rem;
+      background: var(--sand);
+      font-size: 0.9rem;
+      color: var(--stone);
+      line-height: 1.8;
+    }
+
+    /* ── Contact / Footer ── */
+    .contact {
+      background: var(--charcoal);
+      color: #fff;
+    }
+
+    .contact-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact .section-title { color: #fff; }
+    .contact .section-text { color: rgba(255,255,255,0.6); margin: 0 auto 2.5rem; }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 1rem 3rem;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.3s;
+    }
+
+    .contact-btn:hover {
+      background: #fff;
+      color: var(--charcoal);
+    }
+
+    footer {
+      background: var(--charcoal);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.92);
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 1rem;
+      transition: color 0.3s;
+    }
+
+    .lightbox-nav:hover { color: #fff; }
+    .lightbox-prev { left: 1rem; }
+    .lightbox-next { right: 1rem; }
+
+    /* ── Reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid.layout-d { grid-template-columns: repeat(2, 1fr); }
+      .details-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 4rem 1.5rem; }
+      nav { padding: 1rem 1.5rem; }
+
+      .nav-toggle { display: block; }
+
+      nav .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(250, 248, 245, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+      }
+
+      nav .nav-links.open { display: flex; }
+      nav .nav-links a { color: var(--charcoal) !important; }
+
+      .hero-content { padding: 0 1.5rem 4rem; }
+
+      .intro { grid-template-columns: 1fr; gap: 2rem; }
+      .intro-image { aspect-ratio: 3/2; }
+
+      .features-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+      .gallery-grid.layout-a,
+      .gallery-grid.layout-b,
+      .gallery-grid.layout-c,
+      .gallery-grid.layout-d,
+      .gallery-grid.layout-e {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid.layout-a .gallery-item:first-child,
+      .gallery-grid.layout-c .gallery-item:last-child {
+        grid-row: auto;
+        grid-column: auto;
+      }
+
+      .gallery-item { min-height: 220px; }
+
+      .details-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      .location-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .location-map { aspect-ratio: 16/9; }
+    }
+
+    @media (max-width: 480px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .location-distances { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" class="logo">Finca Javea</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#villa">De Villa</a></li>
+      <li><a href="#slaapkamers">Slaapkamers</a></li>
+      <li><a href="#buiten">Buiten</a></li>
+      <li><a href="#locatie">Locatie</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>Finca Javea</h1>
+      <p>Een prachtige villa verscholen in het hart van Xabia, op loopafstand van het historisch centrum en de kust.</p>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section id="villa">
+    <div class="intro">
+      <div class="intro-image reveal">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80&auto=format" alt="Villa interieur">
+      </div>
+      <div class="reveal">
+        <span class="section-label">Welkom</span>
+        <h2 class="section-title">Uw thuis aan de Costa Blanca</h2>
+        <p class="section-text">
+          Deze karaktervolle finca biedt een unieke combinatie van privacy, ruimte en ligging. Met vier slaapkamers, vier badkamers en een apart gastenhuis is het de ideale bestemming voor families en twee stellen die samen willen genieten van het Spaanse leven.
+        </p>
+        <br>
+        <p class="section-text">
+          De mogelijkheid tot een vijfde slaapkamer maakt de villa geschikt voor maximaal 10 personen. Geniet van de buitenkeuken, twee ruime veranda's en een weelderige tuin terwijl u op loopafstand bent van alles wat Javea te bieden heeft.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="kenmerken">
+    <div class="features-inner">
+      <div class="reveal" style="text-align:center;">
+        <span class="section-label">In het kort</span>
+        <h2 class="section-title">Alles wat u nodig heeft</h2>
+      </div>
+      <div class="features-grid reveal">
+        <div class="feature-card">
+          <span class="feature-icon">&#9711;</span>
+          <h3>4-5 Slaapkamers</h3>
+          <p>Ruime kamers voor 8-10 personen met een optionele vijfde kamer</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">&#9711;</span>
+          <h3>4 Badkamers</h3>
+          <p>Vier complete badkamers en vijf toiletten voor maximaal comfort</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">&#9711;</span>
+          <h3>Gastenhuis</h3>
+          <p>Een apart gastenverblijf voor extra privacy en ruimte</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">&#9711;</span>
+          <h3>Toplocatie</h3>
+          <p>Loopafstand van het oude centrum van Javea en dichtbij de kust</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Living spaces gallery -->
+  <section id="woonruimtes">
+    <div class="gallery-section reveal">
+      <div class="gallery-header">
+        <div>
+          <span class="section-label">Interieur</span>
+          <h2 class="section-title">Woonruimtes</h2>
+        </div>
+      </div>
+      <div class="gallery-grid layout-a">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1000&q=80&auto=format" alt="Woonkamer" loading="lazy">
+          <div class="caption">Ruime woonkamer met natuurlijk licht</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80&auto=format" alt="Keuken" loading="lazy">
+          <div class="caption">Volledig uitgeruste keuken</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&q=80&auto=format" alt="Eethoek" loading="lazy">
+          <div class="caption">Sfeervolle eethoek</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- Bedrooms gallery -->
+  <section id="slaapkamers">
+    <div class="gallery-section reveal">
+      <div class="gallery-header">
+        <div>
+          <span class="section-label">Slaapkamers</span>
+          <h2 class="section-title">Rust & Comfort</h2>
+        </div>
+      </div>
+      <div class="gallery-grid layout-d">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80&auto=format" alt="Slaapkamer 1" loading="lazy">
+          <div class="caption">Master slaapkamer</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=80&auto=format" alt="Slaapkamer 2" loading="lazy">
+          <div class="caption">Slaapkamer 2</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&q=80&auto=format" alt="Slaapkamer 3" loading="lazy">
+          <div class="caption">Slaapkamer 3</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=600&q=80&auto=format" alt="Slaapkamer 4" loading="lazy">
+          <div class="caption">Slaapkamer 4</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- Bathrooms gallery -->
+  <section id="badkamers">
+    <div class="gallery-section reveal">
+      <div class="gallery-header">
+        <div>
+          <span class="section-label">Badkamers</span>
+          <h2 class="section-title">Luxe & Verzorging</h2>
+        </div>
+      </div>
+      <div class="gallery-grid layout-b">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80&auto=format" alt="Badkamer 1" loading="lazy">
+          <div class="caption">Badkamer met inloopdouche</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80&auto=format" alt="Badkamer 2" loading="lazy">
+          <div class="caption">Badkamer met ligbad</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?w=600&q=80&auto=format" alt="Badkamer 3" loading="lazy">
+          <div class="caption">Ensuite badkamer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="highlight">
+    <div class="highlight-inner reveal">
+      <blockquote>&ldquo;De perfecte plek om te ontsnappen, te ontspannen en het mediterrane leven te omarmen.&rdquo;</blockquote>
+      <cite>Javea, Costa Blanca &mdash; Spanje</cite>
+    </div>
+  </section>
+
+  <!-- Outdoor gallery -->
+  <section id="buiten">
+    <div class="gallery-section reveal">
+      <div class="gallery-header">
+        <div>
+          <span class="section-label">Buiten</span>
+          <h2 class="section-title">Tuin, Veranda's & Buitenkeuken</h2>
+        </div>
+      </div>
+      <div class="gallery-grid layout-c">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80&auto=format" alt="Veranda" loading="lazy">
+          <div class="caption">Overdekte veranda</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1000&q=80&auto=format" alt="Tuin met veranda" loading="lazy">
+          <div class="caption">Grote tuin en terras</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=80&auto=format" alt="Buitenkeuken" loading="lazy">
+          <div class="caption">Buitenkeuken</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- Guesthouse -->
+  <section id="gastenhuis">
+    <div class="gallery-section reveal">
+      <div class="gallery-header">
+        <div>
+          <span class="section-label">Gastenhuis</span>
+          <h2 class="section-title">Privaat Verblijf</h2>
+        </div>
+      </div>
+      <div class="gallery-grid layout-e">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?w=800&q=80&auto=format" alt="Gastenhuis exterieur" loading="lazy">
+          <div class="caption">Het gastenhuis</div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=800&q=80&auto=format" alt="Gastenhuis interieur" loading="lazy">
+          <div class="caption">Interieur gastenhuis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Details -->
+  <section class="features" id="details">
+    <div class="details reveal">
+      <div style="text-align:center; margin-bottom:1rem;">
+        <span class="section-label">Faciliteiten</span>
+        <h2 class="section-title">Alles in detail</h2>
+      </div>
+      <div class="details-grid">
+        <div class="detail-group">
+          <h3>Slapen</h3>
+          <ul>
+            <li>4 ruime slaapkamers</li>
+            <li>Optionele 5e slaapkamer (aansluitend)</li>
+            <li>8 personen, uitbreidbaar tot 10</li>
+            <li>Apart gastenhuis</li>
+            <li>Ideaal voor twee stellen</li>
+          </ul>
+        </div>
+        <div class="detail-group">
+          <h3>Badkamers & Voorzieningen</h3>
+          <ul>
+            <li>4 complete badkamers</li>
+            <li>5 toiletten</li>
+            <li>Volledig uitgeruste keuken</li>
+            <li>Buitenkeuken</li>
+            <li>Wi-Fi, airconditioning</li>
+          </ul>
+        </div>
+        <div class="detail-group">
+          <h3>Buiten</h3>
+          <ul>
+            <li>Twee overdekte veranda's</li>
+            <li>Grote privétuin</li>
+            <li>Buitenkeuken met barbecue</li>
+            <li>Privé parkeerplaats</li>
+            <li>Rustige omgeving</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="location" id="locatie">
+    <div class="location-inner reveal">
+      <div>
+        <span class="section-label">Locatie</span>
+        <h2 class="section-title">Het beste van Javea binnen handbereik</h2>
+        <p class="section-text">
+          De finca ligt op een toplocatie in Javea, op loopafstand van het charmante oude centrum met zijn gezellige restaurants, winkels en markten. De prachtige stranden en verborgen baaien van de Costa Blanca zijn slechts enkele minuten rijden.
+        </p>
+        <div class="location-distances">
+          <div class="distance-item">
+            <span class="dist">5 min</span>
+            <span class="place">Oude centrum Javea</span>
+          </div>
+          <div class="distance-item">
+            <span class="dist">10 min</span>
+            <span class="place">Arenal strand</span>
+          </div>
+          <div class="distance-item">
+            <span class="dist">8 min</span>
+            <span class="place">Haven & Port</span>
+          </div>
+          <div class="distance-item">
+            <span class="dist">90 min</span>
+            <span class="place">Luchthaven Alicante</span>
+          </div>
+        </div>
+      </div>
+      <div class="location-map">
+        <img src="https://images.unsplash.com/photo-1504019347908-b45f9b0b8dd5?w=800&q=80&auto=format" alt="Javea kust" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="contact-inner reveal">
+      <span class="section-label" style="color:var(--terracotta);">Reserveren</span>
+      <h2 class="section-title">Interesse?</h2>
+      <p class="section-text">
+        Neem contact op voor beschikbaarheid, prijzen en meer informatie over deze prachtige finca in Javea.
+      </p>
+      <a href="mailto:info@fincajavea.com" class="contact-btn">Neem contact op</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Finca Javea &mdash; Xabia, Costa Blanca, Spanje
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Sluiten">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Vorige">&#8249;</button>
+    <button class="lightbox-nav lightbox-next" aria-label="Volgende">&#8250;</button>
+    <img src="" alt="Foto weergave">
+  </div>
+
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Smooth reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const galleryItems = document.querySelectorAll('.gallery-item img');
+    let currentIndex = 0;
+    const images = Array.from(galleryItems).map(img => img.src.replace(/w=\d+/, 'w=1600'));
+
+    galleryItems.forEach((img, index) => {
+      img.parentElement.addEventListener('click', () => {
+        currentIndex = index;
+        lightboxImg.src = images[currentIndex];
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+    });
+
+    lightbox.querySelector('.lightbox-next').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex];
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        lightboxImg.src = images[currentIndex];
+      }
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % images.length;
+        lightboxImg.src = images[currentIndex];
+      }
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
